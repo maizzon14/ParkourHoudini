@@ -6,8 +6,19 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     PlayerInput input;
 
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float jumpForce = 5f;
+    private float speed;
+    private float jumpForce;
+
+    public float speedMovement
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
+    public float JumpForce
+    {
+        get { return jumpForce; }
+        set { jumpForce = value; }
+    }
 
     Vector2 moveInput;
 
@@ -62,6 +73,12 @@ public class PlayerMovement : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             rb.MoveRotation(Quaternion.Slerp(transform.rotation, toRotation, Time.fixedDeltaTime * 10f));
         }
+    }
+
+    public void SetStats(float speed, float jumpForce)
+    {
+        this.speed = speed;
+        this.jumpForce = jumpForce;
     }
 
     public void Jump()

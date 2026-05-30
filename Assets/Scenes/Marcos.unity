@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 614290756}
   - component: {fileID: 614290757}
   - component: {fileID: 614290758}
+  - component: {fileID: 614290759}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -586,6 +587,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 09778dee-6825-4712-9fb4-295991d57f85
     m_ActionName: 'CameraControls/MouseZoom[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 614290759}
+        m_TargetAssemblyTypeName: StatesManager, Assembly-CSharp
+        m_MethodName: OnChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 12eeb21b-dff8-41ef-9564-7bb934320f61
+    m_ActionName: 'Player/ChangeState[/Keyboard/1,/Keyboard/2,/Keyboard/3]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -630,13 +647,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6bcd2f0cb5a9d41bf2415e7c6e1009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 15
-  jumpForce: 5
   isGrounded: 0
   floorDistance: 1.2
   cameraTransform: {fileID: 1803702266}
   shouldFaceMoveDirection: 1
   acceleration: 50
+--- !u!114 &614290759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614290749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e05b1d3a6ca73641ac23aff26a892cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatesManager
+  currentState: 0
+  statesDataSmall: {fileID: 11400000, guid: 1a3bf59f5bd551449b73b8b27e7e1687, type: 2}
+  statesDataMedium: {fileID: 11400000, guid: 026798b8ebeec704dab6d923fbd69421, type: 2}
+  statesDataBig: {fileID: 11400000, guid: f11e8adc7922ed0499a9b42af4850ba3, type: 2}
+  playerScript: {fileID: 614290758}
+  startingState: 1
 --- !u!1 &716655486
 GameObject:
   m_ObjectHideFlags: 0
