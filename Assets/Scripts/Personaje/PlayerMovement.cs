@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         right.Normalize();
 
         Vector3 moveDirection = forward * moveInput.y + right * moveInput.x;
-        
+
         Vector3 currentVelocity = rb.linearVelocity;
 
         Vector3 targetVelocity = moveDirection * speed;
