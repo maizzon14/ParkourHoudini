@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973c4c1b5dd819e4aa612c2c234475e2, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: Assembly-CSharp::StatesData
-  speed: 10
+  speed: 12
   jumpForce: 15
   mass: 4
   scale: {x: 1, y: 1, z: 1}

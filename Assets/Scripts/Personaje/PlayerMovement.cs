@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
     private float jumpForce;
 
+    
+    private Vector3 currentHorizontalVelocity;
+
     public float speedMovement
     {
         get { return speed; }
@@ -20,10 +23,20 @@ public class PlayerMovement : MonoBehaviour
         set { jumpForce = value; }
     }
 
+    private enum MoveMode
+    {
+        Normal,
+        Ice
+    }
+
+    private MoveMode moveMode = MoveMode.Normal;
+
     Vector2 moveInput;
 
     [SerializeField] private bool isGrounded = false;
+    [SerializeField] private bool isOnIce = false;
     [SerializeField] private float floorDistance = 1.2f;
+    [SerializeField] private float iceDistance = 3f;
 
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private bool shouldFaceMoveDirection = false;
@@ -45,28 +58,42 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 forward = cameraTransform.forward;
-        Vector3 right = cameraTransform.right;
+        Vector3 velocity = rb.linearVelocity;
 
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
+        Vector3 moveDirection = cameraTransform.forward * moveInput.y + cameraTransform.right * moveInput.x;
+        moveDirection.y = 0;
+        moveDirection.Normalize();
 
-        Vector3 moveDirection = forward * moveInput.y + right * moveInput.x;
-        
-        Vector3 currentVelocity = rb.linearVelocity;
+        Vector3 horizontal = new Vector3(velocity.x, 0, velocity.z);
 
-        Vector3 targetVelocity = moveDirection * speed;
+        if (moveMode == MoveMode.Ice)
+        {
+            float accel = acceleration * Time.fixedDeltaTime * 0.2f;
+            float friction = 0.995f;
 
-        Vector3 velocityChange = targetVelocity - new Vector3(currentVelocity.x, 0, currentVelocity.z);
+            horizontal += moveDirection * speed * accel;
+            horizontal *= friction;
+        }
+        else
+        {
+            Vector3 currentVelocity = rb.linearVelocity;
 
-        velocityChange = Vector3.ClampMagnitude(velocityChange, acceleration * Time.fixedDeltaTime);
+            Vector3 targetVelocity = moveDirection * speed;
 
-        currentVelocity.x += velocityChange.x;
-        currentVelocity.z += velocityChange.z;
+            Vector3 velocityChange = targetVelocity - new Vector3(currentVelocity.x, 0, currentVelocity.z);
 
-        rb.linearVelocity = currentVelocity;
+            velocityChange = Vector3.ClampMagnitude(velocityChange, acceleration * Time.fixedDeltaTime);
+
+            currentVelocity.x += velocityChange.x;
+            currentVelocity.z += velocityChange.z;
+
+            horizontal = new Vector3(currentVelocity.x, 0, currentVelocity.z);
+        }
+
+        float maxSpeed = speed * (moveMode == MoveMode.Ice ? 2f : 1f);
+        horizontal = Vector3.ClampMagnitude(horizontal, maxSpeed);
+
+        rb.linearVelocity = new Vector3(horizontal.x, velocity.y, horizontal.z);
 
         if (shouldFaceMoveDirection && moveDirection.sqrMagnitude > 0.01f)
         {
@@ -85,6 +112,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded)
         {
+            Vector3 velocity = rb.linearVelocity;
+
+            rb.linearVelocity = new Vector3(velocity.x, 0, velocity.z);
+
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
@@ -92,5 +123,18 @@ public class PlayerMovement : MonoBehaviour
     void CheckGround() 
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, floorDistance);
+        isOnIce = Physics.Raycast(transform.position, Vector3.down, iceDistance, LayerMask.GetMask("Ice"));
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(isOnIce)
+        {
+            moveMode = MoveMode.Ice;
+        }
+        else 
+        {
+            moveMode = MoveMode.Normal;
+        }
     }
 }
