@@ -13,7 +13,7 @@ public class BotonPuerta : MonoBehaviour
         if (other.CompareTag("Box"))
         {
             activado = true;
-            Destroy(puerta);
+            puerta.SetActive(false);
         }
     }
 }
