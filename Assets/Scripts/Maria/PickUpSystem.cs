@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PickUpSystem : MonoBehaviour
 {
@@ -7,8 +8,14 @@ public class PickUpSystem : MonoBehaviour
     public StatesManager statesManager;
 
     private Rigidbody heldObject;
+    PlayerInput input;
 
-    void Update()
+    private void Start()
+    {
+        input = GetComponent<PlayerInput>();
+    }
+
+    public void Interact()
     {
        
         if (heldObject != null && statesManager.currentState != StatesManager.State.Big)
@@ -31,7 +38,6 @@ public class PickUpSystem : MonoBehaviour
             else
             {
                 DropObject();
-            }
         }
     }
 
@@ -49,7 +55,7 @@ public class PickUpSystem : MonoBehaviour
                 {
                     heldObject.useGravity = false;
 
-                    // Si te da error aquí, cambia por velocity
+                    // Si te da error aquï¿½, cambia por velocity
                     heldObject.linearVelocity = Vector3.zero;
                 }
 
