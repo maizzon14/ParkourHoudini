@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 59986949}
   - component: {fileID: 59986948}
   - component: {fileID: 59986947}
+  - component: {fileID: 59986956}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -157,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickUpSystem
   grabDistance: 2
   holdPoint: {fileID: 390397415}
+  statesManager: {fileID: 59986948}
 --- !u!114 &59986948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +393,20 @@ Transform:
   - {fileID: 390397415}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &59986956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59986946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdce06d71a36154680ec8536750cf8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPush
+  pushPower: 10
+  statesManager: {fileID: 59986948}
 --- !u!1 &188480072
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,9 +421,10 @@ GameObject:
   - component: {fileID: 188480076}
   - component: {fileID: 188480075}
   - component: {fileID: 188480074}
+  - component: {fileID: 188480079}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,6 +587,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188480072}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &188480079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188480072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f680dcaae3c6f046ad096fd725550cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorController
+  statesManager: {fileID: 59986948}
 --- !u!1 &390397414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1434,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035891195}
   serializedVersion: 5
-  m_Mass: 20
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
