@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PickUpSystem : MonoBehaviour
 {
@@ -6,11 +7,15 @@ public class PickUpSystem : MonoBehaviour
     public Transform holdPoint;
 
     private Rigidbody heldObject;
+    PlayerInput input;
 
-    void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+        input = GetComponent<PlayerInput>();
+    }
+
+    public void Interact()
+    {
             if (heldObject == null)
             {
                 GrabObject();
@@ -18,7 +23,6 @@ public class PickUpSystem : MonoBehaviour
             else
             {
                 DropObject();
-            }
         }
     }
 
