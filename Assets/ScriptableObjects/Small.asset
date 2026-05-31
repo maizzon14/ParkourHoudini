@@ -15,3 +15,4 @@ MonoBehaviour:
   speed: 15
   jumpForce: 5
   mass: 1
+  scale: {x: 0.75, y: 0.75, z: 0.75}

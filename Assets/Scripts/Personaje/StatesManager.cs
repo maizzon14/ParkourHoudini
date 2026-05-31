@@ -43,6 +43,7 @@ public class StatesManager : MonoBehaviour
         StatesData data = GetData(currentState);
 
         rb.mass = data.mass;
+        rb.transform.localScale = data.scale;
         playerScript.SetStats(data.speed, data.jumpForce);
     }
 

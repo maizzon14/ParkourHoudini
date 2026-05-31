@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   isGrounded: 0
-  floorDistance: 1.2
+  floorDistance: 1.5
   cameraTransform: {fileID: 1803702266}
   shouldFaceMoveDirection: 1
   acceleration: 50
