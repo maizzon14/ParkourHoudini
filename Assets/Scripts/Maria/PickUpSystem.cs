@@ -4,13 +4,26 @@ public class PickUpSystem : MonoBehaviour
 {
     public float grabDistance = 3f;
     public Transform holdPoint;
+    public StatesManager statesManager;
 
     private Rigidbody heldObject;
 
     void Update()
     {
+       
+        if (heldObject != null && statesManager.currentState != StatesManager.State.Big)
+        {
+            DropObject();
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (statesManager.currentState != StatesManager.State.Big)
+            {
+                Debug.Log("Necesitas ser grande para coger cajas");
+                return;
+            }
+
             if (heldObject == null)
             {
                 GrabObject();
@@ -35,6 +48,8 @@ public class PickUpSystem : MonoBehaviour
                 if (heldObject != null)
                 {
                     heldObject.useGravity = false;
+
+                    // Si te da error aquí, cambia por velocity
                     heldObject.linearVelocity = Vector3.zero;
                 }
 
