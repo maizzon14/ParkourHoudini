@@ -8,78 +8,81 @@ public class PickUpSystem : MonoBehaviour
     public StatesManager statesManager;
 
     private Rigidbody heldObject;
-    PlayerInput input;
+    private PlayerInput input;
 
     private void Start()
     {
         input = GetComponent<PlayerInput>();
     }
 
-    public void Interact()
+    void Update()
     {
-
+        // Si llevas una caja y cambias a Medium o Small, la sueltas
         if (heldObject != null && statesManager.currentState != StatesManager.State.Big)
         {
             DropObject();
         }
 
+        // Detectar la acción Interact
         if (input.actions["Interact"].triggered)
         {
-            if (statesManager.currentState != StatesManager.State.Big)
-            {
-                Debug.Log("Necesitas ser grande para coger cajas");
-                return;
-            }
+            Interact();
+        }
+    }
 
-            if (heldObject == null)
+    public void Interact()
+    {
+        if (statesManager.currentState != StatesManager.State.Big)
+        {
+            Debug.Log("Necesitas ser grande para coger cajas");
+            return;
+        }
+
+        if (heldObject == null)
+        {
+            GrabObject();
+        }
+        else
+        {
+            DropObject();
+        }
+    }
+
+    void GrabObject()
+    {
+        Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, grabDistance);
+
+        foreach (Collider col in nearbyObjects)
+        {
+            if (col.CompareTag("Box"))
             {
-                GrabObject();
-            }
-            else
-            {
-                DropObject();
+                heldObject = col.GetComponent<Rigidbody>();
+
+                if (heldObject != null)
+                {
+                    heldObject.useGravity = false;
+                    heldObject.linearVelocity = Vector3.zero;
+                }
+
+                break;
             }
         }
     }
 
-        void GrabObject()
+    void DropObject()
+    {
+        if (heldObject != null)
         {
-            Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, grabDistance);
-
-            foreach (Collider col in nearbyObjects)
-            {
-                if (col.CompareTag("Box"))
-                {
-                    heldObject = col.GetComponent<Rigidbody>();
-
-                    if (heldObject != null)
-                    {
-                        heldObject.useGravity = false;
-
-                        // Si te da error aquï¿½, cambia por velocity
-                        heldObject.linearVelocity = Vector3.zero;
-                    }
-
-                    break;
-                }
-            }
+            heldObject.useGravity = true;
+            heldObject = null;
         }
+    }
 
-        void DropObject()
+    void FixedUpdate()
+    {
+        if (heldObject != null)
         {
-            if (heldObject != null)
-            {
-                heldObject.useGravity = true;
-                heldObject = null;
-            }
+            heldObject.MovePosition(holdPoint.position);
         }
-
-        void FixedUpdate()
-        {
-            if (heldObject != null)
-            {
-                heldObject.MovePosition(holdPoint.position);
-            }
-        }
-    
+    }
 }
