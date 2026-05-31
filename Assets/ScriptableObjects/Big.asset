@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973c4c1b5dd819e4aa612c2c234475e2, type: 3}
   m_Name: Big
   m_EditorClassIdentifier: Assembly-CSharp::StatesData
-  speed: 5
-  jumpForce: 22
+  speed: 9
+  jumpForce: 25
   mass: 8
   scale: {x: 1.25, y: 1.25, z: 1.25}
