@@ -17,13 +17,13 @@ public class PickUpSystem : MonoBehaviour
 
     public void Interact()
     {
-       
+
         if (heldObject != null && statesManager.currentState != StatesManager.State.Big)
         {
             DropObject();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (input.actions["Interact"].triggered)
         {
             if (statesManager.currentState != StatesManager.State.Big)
             {
@@ -38,46 +38,48 @@ public class PickUpSystem : MonoBehaviour
             else
             {
                 DropObject();
-        }
-    }
-
-    void GrabObject()
-    {
-        Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, grabDistance);
-
-        foreach (Collider col in nearbyObjects)
-        {
-            if (col.CompareTag("Box"))
-            {
-                heldObject = col.GetComponent<Rigidbody>();
-
-                if (heldObject != null)
-                {
-                    heldObject.useGravity = false;
-
-                    // Si te da error aqu�, cambia por velocity
-                    heldObject.linearVelocity = Vector3.zero;
-                }
-
-                break;
             }
         }
     }
 
-    void DropObject()
-    {
-        if (heldObject != null)
+        void GrabObject()
         {
-            heldObject.useGravity = true;
-            heldObject = null;
-        }
-    }
+            Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, grabDistance);
 
-    void FixedUpdate()
-    {
-        if (heldObject != null)
-        {
-            heldObject.MovePosition(holdPoint.position);
+            foreach (Collider col in nearbyObjects)
+            {
+                if (col.CompareTag("Box"))
+                {
+                    heldObject = col.GetComponent<Rigidbody>();
+
+                    if (heldObject != null)
+                    {
+                        heldObject.useGravity = false;
+
+                        // Si te da error aqu�, cambia por velocity
+                        heldObject.linearVelocity = Vector3.zero;
+                    }
+
+                    break;
+                }
+            }
         }
-    }
+
+        void DropObject()
+        {
+            if (heldObject != null)
+            {
+                heldObject.useGravity = true;
+                heldObject = null;
+            }
+        }
+
+        void FixedUpdate()
+        {
+            if (heldObject != null)
+            {
+                heldObject.MovePosition(holdPoint.position);
+            }
+        }
+    
 }
