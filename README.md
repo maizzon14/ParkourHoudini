@@ -1,4 +1,4 @@
-### PARKOUR HOUDINI
+# PARKOUR HOUDINI
 
 ## Instrucciones
 Las instrucciones para jugar a nuestro juego son sencillas. El objetivo es superar todos los puzzles y obstáculos que se te presenten hasta llegar a la meta. 
