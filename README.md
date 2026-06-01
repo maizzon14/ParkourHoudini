@@ -28,3 +28,7 @@ Y por otra parte, combinamos todas estas mecánicas para formar nuevas y así qu
 -Te deslizas con el pequeño en la rampa y en mitad te cambias al grande para poder romper la puerta. 
 -Plataformas que se rompan según el peso del personaje.
 -Plataformas que suben o bajan dependiendo el peso.
+
+## GAMEPLAY
+
+https://youtu.be/DhmIHcCE7_Q
