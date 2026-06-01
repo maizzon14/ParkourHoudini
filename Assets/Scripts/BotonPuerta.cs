@@ -2,18 +2,26 @@ using UnityEngine;
 
 public class BotonPuerta : MonoBehaviour
 {
-    [SerializeField] private GameObject puerta;
+    private bool hayCaja = false;
 
-    private bool activado = false;
+    public bool EstaActivo()
+    {
+        return hayCaja;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (activado) return;
-
         if (other.CompareTag("Box"))
         {
-            activado = true;
-            puerta.SetActive(false);
+            hayCaja = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Box"))
+        {
+            hayCaja = false;
         }
     }
 }

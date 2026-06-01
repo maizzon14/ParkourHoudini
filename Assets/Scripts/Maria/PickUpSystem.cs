@@ -18,14 +18,14 @@ public class PickUpSystem : MonoBehaviour
     public void Interact()
     {
 
-        if (heldObject != null && statesManager.currentState != StatesManager.State.Big)
+        if (heldObject != null && (statesManager.currentState != StatesManager.State.Big && statesManager.currentState != StatesManager.State.Medium))
         {
             DropObject();
         }
 
         if (input.actions["Interact"].triggered)
         {
-            if (statesManager.currentState != StatesManager.State.Big)
+            if (statesManager.currentState != StatesManager.State.Big && statesManager.currentState != StatesManager.State.Medium)
             {
                 Debug.Log("Necesitas ser grande para coger cajas");
                 return;
@@ -56,7 +56,6 @@ public class PickUpSystem : MonoBehaviour
                     {
                         heldObject.useGravity = false;
 
-                        // Si te da error aqu�, cambia por velocity
                         heldObject.linearVelocity = Vector3.zero;
                     }
 

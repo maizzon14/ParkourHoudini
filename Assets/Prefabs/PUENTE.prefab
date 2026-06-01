@@ -167,8 +167,8 @@ FixedJoint:
   serializedVersion: 1
   m_ConnectedBody: {fileID: 3892323159486857860}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: 500
-  m_BreakTorque: 500
+  m_BreakForce: 3000
+  m_BreakTorque: 2500
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
@@ -323,8 +323,8 @@ FixedJoint:
   serializedVersion: 1
   m_ConnectedBody: {fileID: 6385499473747879972}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: 500
-  m_BreakTorque: 500
+  m_BreakForce: 3000
+  m_BreakTorque: 2500
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
@@ -479,8 +479,8 @@ FixedJoint:
   serializedVersion: 1
   m_ConnectedBody: {fileID: 1258276652821051592}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: 500
-  m_BreakTorque: 500
+  m_BreakForce: 1650
+  m_BreakTorque: 1650
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
@@ -630,8 +630,8 @@ FixedJoint:
   serializedVersion: 1
   m_ConnectedBody: {fileID: 8743476993948439960}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: 500
-  m_BreakTorque: 500
+  m_BreakForce: 1650
+  m_BreakTorque: 1650
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
@@ -786,8 +786,8 @@ FixedJoint:
   serializedVersion: 1
   m_ConnectedBody: {fileID: 5627467894052559956}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: 500
-  m_BreakTorque: 500
+  m_BreakForce: 1650
+  m_BreakTorque: 1650
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
